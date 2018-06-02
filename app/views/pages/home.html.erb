@@ -1,0 +1,18 @@
+<div align="center" class="jumbotron">
+  <div class="container ">
+    <h1 class="display-4 header-text">Wapper</h1>
+    <p class="lead header-text">Find out the weather anywhere in the world!</p>
+    <%= form_tag("/search", method: "get", class: "upper-margin") do %>
+            <div class="input-group mb-3">
+                
+              <%= text_field_tag(:q, "", class: "form-control", placeholder: "Search a location!") %>
+            
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary">
+                    <%= submit_tag("Search", :type => :image, :src => "https://png.icons8.com/ios/30/222222/search.png") %>
+                  </button>
+              </div>
+            </div>
+    <% end %>
+  </div>
+</div>
