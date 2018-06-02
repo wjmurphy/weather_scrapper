@@ -2,27 +2,37 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'net/http'
+require 'twitter'
+ 
   
 namespace :weathertweeter do
   desc "Import top 100 cities and tweet their current weather"
 
   task weather_tweeter: :environment do
-    url = "https://www.worldatlas.com/citypops.htm"
-    res = Net::HTTP.get_response(URI.parse(url))
+    puts "one"
+    pop_url = "https://www.worldatlas.com/citypops.htm"
+    res = Net::HTTP.get_response(URI.parse(pop_url))
     if res.code.to_i >= 200 && res.code.to_i < 400
-    page = Nokogiri::HTML(open(url))
-    table = page.at("tbody")
+        
+        page = Nokogiri::HTML(open(pop_url))
+        
+        table = page.at("tbody")
+        
         if table != nil
-            table.css('tr').first do |line|
+            puts "two"
+            table.css('tr').each do |line|
+                puts "three"
                 country = line.css('td[2]')
-                web_url = "www.wapper.co.uk/search?utf8=✓&q=#{country.text.strip}"
+                web_url = "www.wapper.co.uk/search?q=#{country.text.strip}"
                 
-                url = "https://www.weather-forecast.com/locations/#{ country.text.strip }/forecasts/latest"
+                url = "https://www.weather-forecast.com/locations/#{ country.text.strip.parameterize }/forecasts/latest"
                 res = Net::HTTP.get_response(URI.parse(url))
                 if res.code.to_i >= 200 && res.code.to_i < 400
-                page = Nokogiri::HTML(open(url))
-                div = page.at(".b-forecast__table-description")
+                    puts "four"
+                    page = Nokogiri::HTML(open(url))
+                    div = page.at(".b-forecast__table-description")
                     if div != nil
+                        puts "five"
                         short = div.search('td').first
                         short_title = short.search('h2')
                         short_summary = short.search('p')
@@ -31,8 +41,8 @@ namespace :weathertweeter do
                         
                     end
                 end
-                
-                $twitter.update("#{@short_title} #{@short_summary} See how the weather is changing here #{web_url} #weather ##{country.text.strip}")
+                message = "#{@short_title} #{@short_summary} See how the weather is changing here #{web_url} #weather ##{country.text.strip.parameterize }"
+                $twitter.update(message.truncate(280))
             end
         
         end
