@@ -48,6 +48,7 @@ group :development do
   gem 'spring'
   
 group :production do
+  gem 'sqlite3'
   gem 'pg', '~> 0.21'
   gem 'redis', "~> 3.0" 
 end
