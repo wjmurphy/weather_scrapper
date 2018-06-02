@@ -30,7 +30,7 @@ gem 'twitter'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'puma', '~> 3.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
