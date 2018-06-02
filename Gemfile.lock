@@ -142,7 +142,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
-    redis (4.0.1)
+    redis (3.3.5)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -214,7 +214,7 @@ DEPENDENCIES
   pg (~> 0.21)
   puma (~> 3.0)
   rails (= 5.0.4)
-  redis
+  redis (~> 3.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
