@@ -107,6 +107,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    pg (0.21.0)
     popper_js (1.12.9)
     public_suffix (3.0.2)
     puma (3.11.4)
@@ -141,6 +142,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
+    redis (4.0.1)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -209,8 +211,10 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  pg (~> 0.21)
   puma (~> 3.0)
   rails (= 5.0.4)
+  redis
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
