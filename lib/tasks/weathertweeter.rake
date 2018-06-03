@@ -22,10 +22,10 @@ namespace :weathertweeter do
             puts "two"
             table.css('tr').each do |line|
                 puts "three"
-                country = line.css('td[2]')
-                web_url = "www.wapper.co.uk/search?q=#{country.text.strip}"
+                country = line.css('td[2]').text.strip
+                web_url = "www.wapper.co.uk/search?q=#{country.parameterize}"
                 
-                url = "https://www.weather-forecast.com/locations/#{ country.text.strip.parameterize }/forecasts/latest"
+                url = "https://www.weather-forecast.com/locations/#{ country.parameterize }/forecasts/latest"
                 res = Net::HTTP.get_response(URI.parse(url))
                 if res.code.to_i >= 200 && res.code.to_i < 400
                     puts "four"
@@ -41,8 +41,8 @@ namespace :weathertweeter do
                         
                     end
                 end
-                message = "#{@short_title} #{@short_summary} See how the weather is changing here #{web_url} #weather ##{country.text.strip.parameterize }"
-                $twitter.update(message.truncate(280))
+                message = "#{@short_title} #{@short_summary} See how the weather is changing here #{web_url} #weather ##{country.parameterize }".truncate(270)
+                $twitter.update(message)
             end
         
         end
